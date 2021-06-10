@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Joke</title>
+</head>
+<body>
+  <div class="container">
+    <h3>Dont Laugh Challange</h3>  
+    <div id="joke" class="joke">
+
+    </div>
+    <button id="get_joke" class="btn">
+        get Another Joke
+    </button>
+  </div>
+<style>
+  *{
+    box-sizing:border-box;
+  }
+  body{
+    background-color:#686de0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:100vh;
+    margin:0;
+  }
+  .container{
+    background-color: #fff;
+    border-radius: 10px;
+    padding:50px 20px;
+    max-width:100%;
+    width:800px;
+    text-align:center;
+    box-shadow:0 10px 20px rgba(0,0,0,0.1),0 6px 6px rgba(0,0,0,0.1);
+  }
+  h3{
+    margin:0;
+    letter-spacing: 2px;
+    opacity:0.5;
+  }
+  .joke{
+    font-size:30px;
+    line-height:40px;
+    margin:50px auto;
+    max-width: 600px;
+  }
+
+  .btn{
+    background-color:#9f68e0;
+    border:0;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.0.1),0 6px 6px rgba(0,0,0,0.1);
+    color:#fff;
+    font-size:16px;
+    padding:14px 40px;
+    cursor: pointer;
+  }
+  .btn:active{
+    transform:scale(0.98);
+  }
+
+  .btn:focus{
+    outline:none;
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  
+  const jokeEl=document.getElementById('joke');
+  const get_joke=document.getElementById('get_joke');
+
+   async function generateJoke(){
+    const jokeRes=await fetch('https://icanhazdadjoke.com/',{
+      headers:{
+        'Accept':'application/json'
+      }
+    })
+    const joke = await jokeRes.json();
+    console.log(joke);
+    jokeEl.innerHTML=joke.joke;
+    
+  }
+
+  get_joke.addEventListener('click',generateJoke);
+</script>
+
+</body>
+</html>
